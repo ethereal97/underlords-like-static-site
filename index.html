@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Underlords</title>
+    <link rel="stylesheet" href="style.css" type="text/css" media="all" />
+</head>
+
+<body>
+  <main>
+    <section id="shop">
+      <slot>#1</slot>
+      <slot>#2</slot>
+      <slot>#3</slot>
+      <slot>#4</slot>
+      <slot>#5</slot>
+      <div id="controls">
+        <button id="reroll">®</button>
+        <button id="upgrade">+</button>
+      </div>
+    </section>
+    
+    <section id="stats">
+      <p id="gold">0</p>
+      <p id="timer">0</p>
+      <p id="round">0</p>
+      <p id="player_name">User</p>
+      <p id="player_rank">Boss I</p>
+      <p id="level">1</p>
+      <p id="exp">
+        <span id="now">3</span>/<span id="next">5</span>
+      </p>
+    </section>
+    
+    <section id="board">
+      
+    </section>
+    
+    <section id="bench">
+      
+    </section>
+  </main>
+  
+  <script src="main.js"></script>
+</body>
+
+</html>
