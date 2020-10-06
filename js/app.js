@@ -13,7 +13,7 @@ const
   stats = document.querySelector('#stats'),
   bench = document.querySelector('#bench');
 
-let name = prompt('Enter your name', sessionStorage.getItem('name') || '');
+let name = prompt('Enter your name', sessionStorage.getItem('user_name') || '');
 
 if (!name) {
   throw new Error('You must enter your name');

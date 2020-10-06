@@ -1,17 +1,27 @@
 'use strict';
 
-function include(path, type) {
-  if (!('BASE_URL' in window && window.BASE_URL)) {
-    var src = document.currentScript.src.split('/');
-    src.pop();
-    window.BASE_URL = src.join('/');
+var src = document.currentScript.src.split('/');
+src.pop();
+const BASE_URL = window.BASE_URL = src.join('/');
+
+function init() {
+  var q = new URLSearchParams(location.search);
+  
+  if (q.has('dev') && !('eruda' in window)) {
+    include('https://cdn.jsdelivr.net/npm/eruda').import(() => eruda.init())
   }
   
-  var _path = [window.BASE_URL, path].join('/');
+  include('js/app.js', 'module').import(null, () => console.error('Failed to import'))
+}
+
+function include(path, type) {
+  if (! path.match(/^https?\:\/\/.+$/)) {
+    path = [BASE_URL, path].join('/');
+  }
   var script = document.createElement('script');
   
   script.type = type || 'text/javascript';
-  script.src = _path;
+  script.src = path;
   
   script.import = function (resolved, rejected) {
     if (typeof resolved === 'function') {
@@ -30,4 +40,4 @@ function include(path, type) {
   return script;
 }
 
-include('js/app.js', 'module').import(null, () => console.error('Failed to import'))
+window.addEventListener('load', () => init.call(window));
