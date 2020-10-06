@@ -5,6 +5,8 @@ import {
   reroll
 } from './src/Shop.js';
 
+import { showErrorModal } from './src/utils/helpers.js';
+
 import Player from './src/Player.js';
 
 const 
@@ -12,10 +14,12 @@ const
   controls = document.querySelector('#controls'),
   stats = document.querySelector('#stats'),
   bench = document.querySelector('#bench');
-
-let name = prompt('Enter your name', sessionStorage.getItem('user_name') || '');
+  
+let name = prompt('Enter your name', sessionStorage.getItem('name') || '');
 
 if (!name) {
+  toastr["error"]("Reload this page to re-enter your name.", "CRITIAL ERROR")
+
   throw new Error('You must enter your name');
 }
 
@@ -31,7 +35,10 @@ controls.querySelector('#reroll').addEventListener('click', function() {
 
 controls.querySelector('#upgrade').addEventListener('click', function() {
   if (player.gold < 5) {
-    alert('Not enough gold to upgrade level');
+    /*showErrorModal('.ui.modal', {
+      message: 'Not enough gold to upgrade level'
+    });*/
+    toastr["error"]("required 5 gold to upgrade your level", "Not Enough Gold")
     return;
   }
   player.gold.subtract(5, 'upgraded');

@@ -2,14 +2,23 @@
 <html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Underlords</title>
-    <link rel="stylesheet" href="style.css" type="text/css" media="all" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Underlords</title>
+  <link rel="stylesheet" href="https://etherio.github.io/cdn/normalize/normalize.css" />
+  <link rel="stylesheet" href="https://etherio.github.io/cdn/semantic/semantic.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+  
+  <link rel="stylesheet" href="style.css" />
+  
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://etherio.github.io/cdn/semantic/semantic.min.js"></script>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 </head>
 
 <body>
-  <main>
+  <main class="ui container">
     <section id="shop">
       <slot>#1</slot>
       <slot>#2</slot>
@@ -17,12 +26,10 @@
       <slot>#4</slot>
       <slot>#5</slot>
     </section>
-    
     <section id="controls">
-      <button id="reroll">reroll</button>
-      <button id="upgrade">upgrade</button>
+      <button class="ui primary button" id="reroll">reroll</button>
+      <button class="ui secondary button" id="upgrade">upgrade</button>
     </section>
- 
     <section id="stats">
       <p id="gold">{{ gold }}</p>
       <p id="timer">{{ timer }}</p>
@@ -34,11 +41,8 @@
         <span id="now">{{ exp }}</span>/<span id="next">{{ next }}</span>
       </p>
     </section>
-    
     <section id="board">
-      
     </section>
-    
     <section id="bench">
       <slot>#1</slot>
       <slot>#2</slot>
@@ -48,6 +52,17 @@
       <slot>#6</slot>
     </section>
   </main>
+  
+  <div class="ui basic modal" id="err">
+    <div class="ui icon header"> <i class="archive icon"></i> <span id="error-title">ERROR</span> </div>
+    <div class="content">
+      <p id="error-message" style="text-align: center"></p>
+    </div>
+    <div class="actions">
+      <div class="ui red basic cancel inverted button"> <i class="remove icon"></i> Cancel </div>
+      <div class="ui green ok inverted button"> <i class="checkmark icon"></i> Confirm </div>
+    </div>
+  </div>
   
   <script src="main.js"></script>
 </body>

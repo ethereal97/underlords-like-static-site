@@ -5,6 +5,7 @@ import {
   sellHeroByName,
   getHeroByName
 } from "./utils/heroes.js";
+import { showErrorModal } from './utils/helpers.js';
 
 let stats = {
   gold: null,
@@ -30,8 +31,8 @@ export function set_player(account) {
   window.player = account;
 }
 
-let each_prepare = 30000/2;
-let each_combat = 60000/2;
+let each_prepare = 3000;
+let each_combat = 6000;
 
 var snapshot_gold;
 
@@ -56,7 +57,10 @@ function buyHero() {
   var name = _hero.name;
   
   if (player.gold.hasLessThan(_hero.tier)) {
-    alert('not enough gold to purchase');
+    /* showErrorModal('.ui.modal', {
+      message: 'Not enough gold to purchase'
+    }); */
+    toastr['error']("You don't have enough credit to purchase that hero.", "Not Enough Gold")
     return;
   }
 
@@ -98,11 +102,12 @@ export function round_end(is_start = false) {
     if (lvl > 5) {
       bonus = 3;
     } else
-    if (lvl < 3) {
-      bonus = lvl - 1;
-    } else {
+    if (lvl > 3) {
       bonus = 2;
+    } else {
+      bonus = lvl;
     }
+    toastr['success']('Round Base Bonus: ' + Number(base_gold + bonus));
     player.gold.add(base_gold + bonus, 'Round ended');
     player.round.increment();
   }
@@ -113,6 +118,7 @@ export function round_end(is_start = false) {
     var interest = Math.floor(snapshot_gold / 10);
     (interest > 3) && (interest = 3);
     player.gold.add(interest, 'Interest');
+    toastr['success']('Interest ' + interest);
   }
   
   reroll(0);
@@ -167,7 +173,10 @@ function addHeroCard(hero) {
 export function reroll(cost=0) {
   if (cost) {
     if (player.gold < cost) {
-      alert('Not enough gold to reroll.');
+      /*showErrorModal('.ui.modal', {
+        message: 'Not enough gold reroll.'
+      });*/
+      toastr['error']("required 2 gold to reroll","Not Enough Gold")
       return;
     }
     player.gold.subtract(cost);
@@ -186,27 +195,5 @@ export function reroll(cost=0) {
     var card = addHeroCard(hero);
     
     slot.appendChild(card);
-  }
-}
-
-function upgrade() {
-  if (player.gold.hasLessThan(5)) {
-    alert('Not enough gold to upgrade.');
-    return;
-  }
-  player.level.increase(5, 'upgraded');
-  player.gold.subtract(5, 'upgraded');
-}
-
-function update() {
-  var c = 0;
-  for (let i in levels) {
-    c+=levels[i];
-    // console.log(c, credit, i)
-    if (credit < c) {  
-
-      document.querySelector('#stats #level').textContent = current_level;
-      return;
-    }
   }
 }
