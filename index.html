@@ -16,21 +16,22 @@
       <slot>#3</slot>
       <slot>#4</slot>
       <slot>#5</slot>
-      <div id="controls">
-        <button id="reroll">®</button>
-        <button id="upgrade">+</button>
-      </div>
     </section>
     
+    <section id="controls">
+      <button id="reroll">reroll</button>
+      <button id="upgrade">upgrade</button>
+    </section>
+ 
     <section id="stats">
-      <p id="gold">0</p>
-      <p id="timer">0</p>
-      <p id="round">0</p>
-      <p id="player_name">User</p>
-      <p id="player_rank">Boss I</p>
-      <p id="level">1</p>
+      <p id="gold">{{ gold }}</p>
+      <p id="timer">{{ timer }}</p>
+      <p id="round">{{ round }}</p>
+      <p id="name">{{ name }}</p>
+      <p id="rank">{{ rank }}</p>
+      <p id="level">{{ level }}</p>
       <p id="exp">
-        <span id="now">3</span>/<span id="next">5</span>
+        <span id="now">{{ exp }}</span>/<span id="next">{{ next }}</span>
       </p>
     </section>
     
@@ -39,7 +40,12 @@
     </section>
     
     <section id="bench">
-      
+      <slot>#1</slot>
+      <slot>#2</slot>
+      <slot>#3</slot>
+      <slot>#4</slot>
+      <slot>#5</slot>
+      <slot>#6</slot>
     </section>
   </main>
   

@@ -22,6 +22,7 @@ body {
   width: 100%;
   height: 100%;
   border: 1px solid black;
+  text-align: center;
 }
 
 #shop slot .purchased {
@@ -29,21 +30,34 @@ body {
 }
 
 #shop slot img {
+  display: block;
+  position: relative;
   width: 100%;
   height: auto;
 }
 
-#shop #controls button {
+/**
+ * Controls
+ */
+
+#controls {
+  text-align: center;
+}
+ 
+#controls button {
   position: relative;
-  left: 40px;
-  margin-top: 5px;
+  margin: 15px 5px;
   width: 80px;
-  height: 25px;
+  height: 45px;
 }
 
 /**
  * Stats
  */
+
+#stats * {
+  text-align: center;
+}
 
 #stats #player_name {
   display: inline-block;
@@ -66,6 +80,15 @@ body {
   font-size: .5rem;
 }
 
+#stats #timer {
+  font-family: monospace;
+}
+
+#stats #timer::after {
+  content: 'sec';
+  padding-left: 5px;
+}
+
 #stats #exp {
   font-family: monospace;
   color: grey;
@@ -86,13 +109,24 @@ body {
 #bench * {
   transition: fade .6s;
 }
- 
+
 #bench span {
   margin: 2px;
-  box-shadow: 1px 1px #655
+  box-shadow: 1px 1px #655;
 }
 
 #bench img {
   width: 54px;
   height: 71px;
+}
+
+#bench {
+  display: grid;
+  grid-template-columns: repeat(6, 16.65%);
+}
+
+#bench slot {
+  display: block;
+  width: 100%;
+  text-align: center;
 }
